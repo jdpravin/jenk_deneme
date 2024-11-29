@@ -1,4 +1,3 @@
-pipeline {
     environment {
         registry = 'jenk_deneme/ml_model'
         dockerImage = ''
@@ -9,7 +8,7 @@ pipeline {
             agent any
             steps {
                 script {
-                    sh 'docker rm -f $(docker ps -aq -f "status=exited")'
+                  
 
                     sh 'sudo chmod 666 /var/run/docker.sock'
                     // Build the Docker image and store its name in dockerImage
