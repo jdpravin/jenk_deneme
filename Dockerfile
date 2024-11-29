@@ -24,7 +24,7 @@ COPY ./requirements.txt /src/app/requirements.txt
 
 # install project requirements
 RUN pip install --no-cache-dir -r requirements.txt
-
+RUN pip install --upgrade jinja2
 # copy project
 COPY . .
 
