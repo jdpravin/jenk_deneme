@@ -14,6 +14,14 @@ pipeline {
                 }
             }
         }
-
+        stage('Run Docker Container') {
+            agent any
+            steps {
+                script {
+                    // Run the built Docker container
+                    sh "docker run -d --name ml_model_container ${dockerImage}"
+                }
+            }
+        }
     }
 }
