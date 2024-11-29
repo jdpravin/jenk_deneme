@@ -10,16 +10,18 @@ pipeline {
             steps {
                 script {
                     sh 'sudo chmod 666 /var/run/docker.sock'
-                    dockerImage = docker.build registry + ":$BUILD_NUMBER"
+                    // Build the Docker image and store its name in dockerImage
+                    dockerImage = docker.build("${registry}:${BUILD_NUMBER}")
                 }
             }
         }
+
         stage('Run Docker Container') {
             agent any
             steps {
                 script {
-                    // Run the built Docker container
-                    sh "docker run -d --name ml_model_container ${dockerImage}"
+                    // Run the container with the correct image reference
+                    sh "docker run -d --name ml_model_container ${dockerImage.imageName()}"
                 }
             }
         }
